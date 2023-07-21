@@ -4,6 +4,8 @@
 bash build.sh
 
 # Upload the IMAGES
+docker push SIDECAR-IMAGE
+docker push FOO-IMAGE
 
 # Deploy sidecar alone as a cloud run service
 gcloud run deploy debugging-sidecar-alone \
