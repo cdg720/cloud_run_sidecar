@@ -11,11 +11,6 @@ app = Flask(__name__)
 client = google.cloud.logging.Client()
 client.setup_logging()
 
-# # NOTE: I suspect this is the problem
-# for i in range(100):
-#     db = firestore.Client()
-#     doc = db.collection("hello").document("hi").get()
-
 from langchain import OpenAI
 from langchain.agents import AgentExecutor
 from langchain.agents import BaseSingleActionAgent
