@@ -1,16 +1,24 @@
+import logging
 import os
 
 import requests
+import google.cloud.logging
 from flask import Flask
 from flask import make_response
 from waitress import serve
 
 app = Flask(__name__)
-
+client = google.cloud.logging.Client()
+client.setup_logging()
 
 @app.route("/foo", methods=["POST"])
 def foo():
-    r = requests.post("http://localhost:5000/sidecar", json={})
+    try:
+        r = requests.post("http://localhost:5000/sidecar", json={})
+    except:
+        logging.error("foo is available but sidecar isn't")
+        return make_response("bar", 400)
+    logging.info("both foo and sidecar are available")
     return make_response("foo", 200)
 
 
