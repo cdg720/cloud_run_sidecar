@@ -11,18 +11,18 @@ spec:
         run.googleapis.com/execution-environment: gen2
     spec:
       containers:
-        - image: FOO-IMAGE
+        - name: foo
+          image: FOO-IMAGE
+          startupProbe:
+            httpGet:
+              path: /
           ports:
             - containerPort: 8080
-          resources:
-            limits:
-              cpu: "1"
-              memory: 512Mi
-        - image: SIDECAR-IMAGE
+        - name: sidecar
+          image: SIDECAR-IMAGE
+          startupProbe:
+            httpGet:
+              path: /
           env:
             - name: PORT
               value: "5000"
-          resources:
-            limits:
-              cpu: "1"
-              memory: 512Mi

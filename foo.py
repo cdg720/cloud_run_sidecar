@@ -22,5 +22,11 @@ def foo():
     return make_response("foo", 200)
 
 
+@app.route("/", methods=["GET"])
+def health_check():
+    return make_response("ok", 200)
+
+
+
 if __name__ == "__main__":
     serve(app, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
